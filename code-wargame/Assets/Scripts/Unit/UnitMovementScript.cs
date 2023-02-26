@@ -1,11 +1,10 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UnitScript : MonoBehaviour
+public class UnitMovementScript : MonoBehaviour
 {
-    public float Speed=2f;
+    public float Speed = 2f;
     public Vector3 MoveVector;
     public Vector3 Destination;
     public Vector3 pos;
@@ -22,7 +21,7 @@ public class UnitScript : MonoBehaviour
         if (moving)
         {
             Moving();
-            if (gameObject.transform.position.x - Destination.x<=0.1 && gameObject.transform.position.x - Destination.x >= -0.1) moving = false;
+            if (gameObject.transform.position.x - Destination.x <= 0.1 && gameObject.transform.position.x - Destination.x >= -0.1) moving = false;
         }
     }
     public void Moving()

@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class PlayerCameraScript : MonoBehaviour
 {
-    public Camera camera;
+    [SerializeField]
+    Player player;
+
+    public Camera cam;
+
+
     public GameObject unit;
     // Start is called before the first frame update
     void Start()
@@ -14,11 +19,11 @@ public class PlayerCameraScript : MonoBehaviour
     public void RayCastFromCamera()
     {
         RaycastHit hit;
-        Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
 
         if (Physics.Raycast(ray, out hit))
         {
-            unit.GetComponent<UnitScript>().MoveTo(hit.point);
+            unit.GetComponent<Unit>().movement.MoveTo(hit.point);
 
             // Do something with the object that was hit by the raycast.
         }

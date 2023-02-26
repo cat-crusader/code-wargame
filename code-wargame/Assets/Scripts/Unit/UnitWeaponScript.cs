@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class UnitWeaponScript : MonoBehaviour
 {
-    public UnitScript unit;
+    [SerializeField]
+    public Unit unit;
+
+
     public float Range;
-    public UnitScript Target;
+    public Unit Target;
     public bool shooting;
     //Transform[] array;
 
@@ -23,9 +26,9 @@ public class UnitWeaponScript : MonoBehaviour
         foreach (var hitCollider in hitColliders)
         {
             Debug.Log(hitCollider.gameObject.name);
-            if (Target == null && hitCollider.gameObject.GetComponentInParent<UnitScript>() != null && hitCollider.gameObject.GetComponentInParent<UnitScript>() != unit)
+            if (Target == null && hitCollider.gameObject.GetComponentInParent<Unit>() != null && hitCollider.gameObject.GetComponentInParent<Unit>() != unit)
             {
-                Target = hitCollider.gameObject.GetComponentInParent<UnitScript>();
+                Target = hitCollider.gameObject.GetComponentInParent<Unit>();
                 shooting = true;
             }
             //hitCollider.SendMessage("AddDamage");
