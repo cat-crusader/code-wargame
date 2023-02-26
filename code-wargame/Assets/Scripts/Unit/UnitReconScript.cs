@@ -15,28 +15,28 @@ public class UnitReconScript : MonoBehaviour
     {
         
     }
-    public bool isVisible(Unit enemy)
+
+    public List<Unit> Recon()
     {
-        //foreach (UnitScript e in spottedEnemyUnits)
-        //{
-        //    if (e == enemy) return true;
-        //}
-        return false;
-    }
-    public void Recon()
-    {
+        List<Unit> visible = new List<Unit>();
         Collider[] hitColliders = Physics.OverlapSphere(unit.gameObject.transform.position, VisionRange);
         foreach (var hitCollider in hitColliders)
         {
             Debug.Log(hitCollider.gameObject.name);
-            if (hitCollider.gameObject.GetComponentInParent<Unit>().Team =="enemy")
-            {
-                // spottedEnemyUnits.Add(hitCollider.gameObject.GetComponentInParent<UnitScript>());
 
+            
+            if (hitCollider.gameObject.GetComponentInParent<Unit>() == null) continue;
+            var recUnit = hitCollider.gameObject.GetComponentInParent<Unit>();
+
+            if (recUnit.Team == "enemy" && recUnit.isVisible == false)
+            {
+                 visible.Add(hitCollider.gameObject.GetComponentInParent<Unit>());
+                 recUnit.SetVisible();
             }
 
 
         }
+        return visible;
     }
     // Update is called once per frame
     void Update()

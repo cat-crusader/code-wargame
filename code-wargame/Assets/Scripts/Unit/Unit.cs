@@ -14,13 +14,31 @@ public class Unit : MonoBehaviour
     [SerializeField]
     public UnitMovementScript movement;
 
-
+    public Player player;
     public string Team;
+
+    public bool isVisible;
+
+    public void SetVisible()
+    {
+        isVisible = true;
+        StartCoroutine(DoCheck());
+    }
+    public void SetInvisible()
+    {
+        isVisible = false;
+        StopCoroutine(DoCheck());
+    }
 
     public void Start()
     {
-
+        isVisible = false;
     }
+    IEnumerator DoCheck()
+    {
 
+       yield return new WaitForSeconds(1f);
+        SetInvisible(); 
+    }
 
 }

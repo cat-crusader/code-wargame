@@ -155,7 +155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 158737044}
-  spottedEnemyUnits: []
+  visibleEnemyUnits: []
 --- !u!114 &158737043
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,7 +185,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vision: {fileID: 158737042}
   cameraScript: {fileID: 158737043}
-  units: []
+  units:
+  - {fileID: 1307703418}
 --- !u!4 &158737045
 Transform:
   m_ObjectHideFlags: 0
@@ -332,7 +333,9 @@ MonoBehaviour:
   weapon: {fileID: 0}
   recon: {fileID: 0}
   movement: {fileID: 0}
+  player: {fileID: 0}
   Team: enemy
+  isVisible: 0
 --- !u!4 &622067370
 Transform:
   m_ObjectHideFlags: 0
@@ -690,7 +693,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unit: {fileID: 1307703418}
-  VisionRange: 0
+  VisionRange: 3
 --- !u!114 &1307703417
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -723,7 +726,9 @@ MonoBehaviour:
   weapon: {fileID: 1307703415}
   recon: {fileID: 1307703416}
   movement: {fileID: 1307703417}
+  player: {fileID: 158737044}
   Team: 
+  isVisible: 0
 --- !u!1 &1782996286
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,17 +7,33 @@ public class PlayerVisionScript : MonoBehaviour
     [SerializeField]
     Player player;
 
-    public List<Unit> spottedEnemyUnits;
+    public List<Unit> visibleEnemyUnits;
 
-    // Start is called before the first frame update
-    void Start()
+    public void Scan()
     {
-        
+        foreach (Unit unit in player.units)
+        {
+           visibleEnemyUnits.AddRange(unit.recon.Recon());
+        }
     }
-
-    // Update is called once per frame
-    void Update()
+    public void addVisibleUnits(List<Unit> units)
     {
-        
+        foreach (Unit unit in player.units)
+        {
+            unit.recon.Recon();
+        }
+    }
+    private void Start()
+    {
+        StartCoroutine(DoCheck());
+    }
+    IEnumerator DoCheck()
+    {
+        for (; ; )
+        {
+            Scan();
+
+            yield return new WaitForSeconds(1f);
+        }
     }
 }

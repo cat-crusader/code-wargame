@@ -8,9 +8,9 @@ public class Player : MonoBehaviour
     PlayerVisionScript vision;
 
     [SerializeField]
-    PlayerCameraScript cameraScript;
+    ClientPlayerCameraScript cameraScript;
 
-    public List<GameObject> units;
+    public List<Unit> units;
 
 
 }
