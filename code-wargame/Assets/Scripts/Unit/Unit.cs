@@ -22,17 +22,19 @@ public class Unit : MonoBehaviour
     public void SetVisible()
     {
         isVisible = true;
+        gameObject.GetComponentInChildren<MeshRenderer>().enabled = true;
         StartCoroutine(DoCheck());
     }
     public void SetInvisible()
     {
         isVisible = false;
+        gameObject.GetComponentInChildren<MeshRenderer>().enabled = false;
         StopCoroutine(DoCheck());
     }
 
     public void Start()
     {
-        isVisible = false;
+       if(Team=="enemy") SetInvisible();
     }
     IEnumerator DoCheck()
     {

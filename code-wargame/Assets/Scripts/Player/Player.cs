@@ -12,5 +12,10 @@ public class Player : MonoBehaviour
 
     public List<Unit> units;
 
+    private void Start()
+    {
+
+    }
+
 
 }

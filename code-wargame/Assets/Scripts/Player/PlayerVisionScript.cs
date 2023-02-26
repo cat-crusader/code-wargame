@@ -11,6 +11,7 @@ public class PlayerVisionScript : MonoBehaviour
 
     public void Scan()
     {
+        visibleEnemyUnits = new List<Unit>();
         foreach (Unit unit in player.units)
         {
            visibleEnemyUnits.AddRange(unit.recon.Recon());
