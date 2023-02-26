@@ -38,9 +38,10 @@ public class UnitReconScript : MonoBehaviour
         }
         return visible;
     }
-    // Update is called once per frame
-    void Update()
+    void OnDrawGizmosSelected()
     {
-        
+        // Draw a yellow sphere at the transform's position
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(unit.gameObject.transform.position, VisionRange);
     }
 }
