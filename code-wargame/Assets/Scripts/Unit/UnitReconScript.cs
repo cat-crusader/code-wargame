@@ -22,7 +22,6 @@ public class UnitReconScript : MonoBehaviour
         Collider[] hitColliders = Physics.OverlapSphere(unit.gameObject.transform.position, VisionRange);
         foreach (var hitCollider in hitColliders)
         {
-            Debug.Log(hitCollider.gameObject.name);
 
             
             if (hitCollider.gameObject.GetComponentInParent<Unit>() == null) continue;

@@ -7,6 +7,7 @@ public class WeaponSystemScript : MonoBehaviour
     public Unit unit;
     public List<Weapon> weapons;
     public Unit target;
+    public bool isTargeted;
 
 
     public Ray LineOfSight;
@@ -14,21 +15,29 @@ public class WeaponSystemScript : MonoBehaviour
     private void Start()
     {
         target = null;
+        isTargeted = false;
         StartCoroutine(DoCheck());
     }
 
     public void AutoTargeting()
     {
         Collider[] hitColliders = Physics.OverlapSphere(unit.gameObject.transform.position, 2);
-
+        isTargeted = false;
         
 
         foreach (var hitCollider in hitColliders)
         {
             if (hitCollider.gameObject.GetComponentInParent<Unit>() == null) continue;
 
-            if (target == null && hitCollider.gameObject.GetComponentInParent<Unit>().Team =="enemy") target = hitCollider.gameObject.GetComponentInParent<Unit>();
+            
+            if (target == null && hitCollider.gameObject.GetComponentInParent<Unit>().Team == "enemy")
+            {
+                target = hitCollider.gameObject.GetComponentInParent<Unit>();
+                
+            }
+            if (hitCollider.gameObject.GetComponentInParent<Unit>() == target) isTargeted = true;
         }
+        if (isTargeted == false) target = null;
     }
     public void EngageTarget()
     {
