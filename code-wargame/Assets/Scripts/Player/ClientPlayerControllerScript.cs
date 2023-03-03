@@ -6,9 +6,12 @@ public class ClientPlayerControllerScript : MonoBehaviour
 {
     [SerializeField]
     Player player;
+    [SerializeField]
+    UIManagerScript managerScript;
 
     public Camera cam;
 
+    public Vector2 SelectBoxStartPosCamera;
     public Vector3 SelectBoxStartPos;
     public Vector3 SelectBoxEndPos;
     public Vector3 SelectBoxCenter;
@@ -47,6 +50,7 @@ public class ClientPlayerControllerScript : MonoBehaviour
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         Physics.Raycast(ray, out hit);
         SelectBoxStartPos = hit.point;
+        SelectBoxStartPosCamera = Input.mousePosition;
     }
     public void SelectBoxEnd()
     {
@@ -103,10 +107,12 @@ public class ClientPlayerControllerScript : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             SelectBoxStart();
+            managerScript.Select();
         }
         if (Input.GetMouseButtonUp(0))
         {
             SelectBoxEnd();
+            managerScript.Deselect();
         }
 
         if (Input.GetMouseButtonDown(1))
