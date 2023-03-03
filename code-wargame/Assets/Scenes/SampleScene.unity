@@ -133,8 +133,8 @@ GameObject:
   m_Component:
   - component: {fileID: 158737045}
   - component: {fileID: 158737044}
-  - component: {fileID: 158737043}
   - component: {fileID: 158737042}
+  - component: {fileID: 158737046}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -156,21 +156,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 158737044}
   visibleEnemyUnits: []
---- !u!114 &158737043
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 158737041}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a358c95b86e5ad44b2d4b4e772765f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 158737044}
-  cam: {fileID: 963194227}
-  unit: {fileID: 1307703412}
 --- !u!114 &158737044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,7 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vision: {fileID: 158737042}
-  cameraScript: {fileID: 158737043}
+  cameraScript: {fileID: 0}
   units:
   - {fileID: 1307703418}
 --- !u!4 &158737045
@@ -203,6 +188,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &158737046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 158737041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f54136459d37ac499a8b436d62bfb1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 158737044}
+  cam: {fileID: 963194227}
+  SelectBoxStartPos: {x: 0, y: 0, z: 0}
+  SelectBoxEndPos: {x: 0, y: 0, z: 0}
+  SelectBoxCenter: {x: 0, y: 0, z: 0}
+  SelectBoxSize: {x: 0, y: 0, z: 0}
+  selected: []
 --- !u!1 &227484105
 GameObject:
   m_ObjectHideFlags: 0
@@ -357,7 +361,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 6329dc3c25740e1439517b85850528aa, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -412,9 +416,10 @@ GameObject:
   m_Component:
   - component: {fileID: 622067370}
   - component: {fileID: 622067369}
+  - component: {fileID: 622067371}
   m_Layer: 0
   m_Name: Unit (1)
-  m_TagString: Untagged
+  m_TagString: Selectable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -452,6 +457,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &622067371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 622067368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9722ea70525ac844592afc767ca36297, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Speed: 1
+  MoveVector: {x: 0, y: 0, z: 0}
+  Destination: {x: 0, y: 0, z: 0}
+  pos: {x: 0, y: 0, z: 0}
+  moving: 0
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -644,7 +666,7 @@ GameObject:
   - component: {fileID: 1261476174}
   m_Layer: 0
   m_Name: Capsule
-  m_TagString: Untagged
+  m_TagString: Selectable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -743,7 +765,7 @@ GameObject:
   - component: {fileID: 1307703419}
   m_Layer: 0
   m_Name: Unit
-  m_TagString: Untagged
+  m_TagString: Selectable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1012,7 +1034,7 @@ GameObject:
   - component: {fileID: 1782996288}
   m_Layer: 0
   m_Name: Capsule
-  m_TagString: Untagged
+  m_TagString: Selectable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
