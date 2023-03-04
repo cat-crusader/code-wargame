@@ -20,13 +20,13 @@ public class WeaponSystemScript : MonoBehaviour
     {
         target = null;
         isTargeted = false;
-        ps.Stop();
+        //ps.Play();
         StartCoroutine(DoCheck());
     }
 
     public void AutoTargeting()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(unit.gameObject.transform.position, 2);
+        Collider[] hitColliders = Physics.OverlapSphere(unit.gameObject.transform.position, 3);//change targeting to smaller
         isTargeted = false;
         
 
@@ -35,7 +35,7 @@ public class WeaponSystemScript : MonoBehaviour
             if (hitCollider.gameObject.GetComponentInParent<Unit>() == null) continue;
 
             
-            if (target == null && hitCollider.gameObject.GetComponentInParent<Unit>().Team == "enemy")
+            if (target == null && hitCollider.gameObject.GetComponentInParent<Unit>().player.type == "enemy" && unit.player.type!="enemy")
             {
                 target = hitCollider.gameObject.GetComponentInParent<Unit>();
                 
@@ -50,11 +50,12 @@ public class WeaponSystemScript : MonoBehaviour
     }
     public void EngageTarget()
     {
-
+        
 
         direction = target.gameObject.transform.position - unit.gameObject.transform.position;
         LineOfSight = new Ray(unit.gameObject.transform.position, direction.normalized);
-     
+
+        ps.transform.rotation = Quaternion.LookRotation(direction);
 
         // ¬изначаЇмо в≥дстань м≥ж точками
         float distance = direction.magnitude;
@@ -71,6 +72,9 @@ public class WeaponSystemScript : MonoBehaviour
     {
 
         ps.Play();
+
+        
+        
         if(weapon.Accuracy > Random.Range(0f, 100.0f))
         {
             target.TakeDamage(1);
@@ -91,6 +95,6 @@ public class WeaponSystemScript : MonoBehaviour
     {
         // Draw a yellow sphere at the transform's position
         Gizmos.color = Color.red;
-        Gizmos.DrawRay(unit.gameObject.transform.position, direction.normalized*2);
+        Gizmos.DrawRay(unit.gameObject.transform.position, direction.normalized*3);
     }
 }

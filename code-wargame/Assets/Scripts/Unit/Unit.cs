@@ -16,7 +16,7 @@ public class Unit : MonoBehaviour
 
     [Header("Test")]
     public Player player;
-    public string Team;
+
 
     public int temp_CurrentHP;
 
@@ -25,19 +25,19 @@ public class Unit : MonoBehaviour
     public void SetVisible()
     {
         isVisible = true;
-        gameObject.GetComponentInChildren<MeshRenderer>().enabled = true;
+        if (player.type == "enemy") gameObject.GetComponentInChildren<MeshRenderer>().enabled = true;
         StartCoroutine(DoCheck());
     }
     public void SetInvisible()
     {
         isVisible = false;
-        gameObject.GetComponentInChildren<MeshRenderer>().enabled = false;
+        if (player.type == "enemy") gameObject.GetComponentInChildren<MeshRenderer>().enabled = false;
         StopCoroutine(DoCheck());
     }
 
     public void Start()
     {
-       if(Team=="enemy") SetInvisible();
+       if(player.type == "enemy") SetInvisible();
         temp_CurrentHP = 10;
     }
     public void Destroy()

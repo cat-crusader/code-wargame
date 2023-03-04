@@ -27,7 +27,7 @@ public class UnitReconScript : MonoBehaviour
             if (hitCollider.gameObject.GetComponentInParent<Unit>() == null) continue;
             var recUnit = hitCollider.gameObject.GetComponentInParent<Unit>();
 
-            if (recUnit.Team == "enemy" && recUnit.isVisible == false)
+            if (recUnit.player.type == "enemy" && recUnit.isVisible == false && unit.player.type!="enemy")
             {
                  visible.Add(hitCollider.gameObject.GetComponentInParent<Unit>());
                  recUnit.SetVisible();
