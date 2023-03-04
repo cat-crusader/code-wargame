@@ -2,12 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon 
-{
 
+    [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/WeaponScriptableObject", order = 1)]
+    public class Weapon : ScriptableObject
+    {
+        public float Range;
+        public float Accuracy;
+    }
 
-    public float Range;
-
-
-
-}

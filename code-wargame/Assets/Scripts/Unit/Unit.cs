@@ -18,6 +18,8 @@ public class Unit : MonoBehaviour
     public Player player;
     public string Team;
 
+    public int temp_CurrentHP;
+
     public bool isVisible;
 
     public void SetVisible()
@@ -36,6 +38,16 @@ public class Unit : MonoBehaviour
     public void Start()
     {
        if(Team=="enemy") SetInvisible();
+        temp_CurrentHP = 10;
+    }
+    public void Destroy()
+    {
+        gameObject.SetActive(false);
+    }
+    public void TakeDamage(int damage)
+    {
+        temp_CurrentHP -= damage;
+        if (temp_CurrentHP <= 0) Destroy();
     }
     IEnumerator DoCheck()
     {

@@ -5,6 +5,10 @@ using UnityEngine;
 public class WeaponSystemScript : MonoBehaviour
 {
     public Unit unit;
+
+    
+    public ParticleSystem ps;
+
     public List<Weapon> weapons;
     public Unit target;
     public bool isTargeted;
@@ -16,6 +20,7 @@ public class WeaponSystemScript : MonoBehaviour
     {
         target = null;
         isTargeted = false;
+        ps.Stop();
         StartCoroutine(DoCheck());
     }
 
@@ -37,7 +42,11 @@ public class WeaponSystemScript : MonoBehaviour
             }
             if (hitCollider.gameObject.GetComponentInParent<Unit>() == target) isTargeted = true;
         }
-        if (isTargeted == false) target = null;
+        if (isTargeted == false)
+        {
+            target = null;
+            ps.Stop();
+        }
     }
     public void EngageTarget()
     {
@@ -50,8 +59,23 @@ public class WeaponSystemScript : MonoBehaviour
         // ¬изначаЇмо в≥дстань м≥ж точками
         float distance = direction.magnitude;
 
-        // ¬иконуЇмо пром≥нь ≥з перев≥ркою на перетин з об'Їктами
-        RaycastHit[] hits = Physics.RaycastAll(LineOfSight, 2);
+        foreach (Weapon weapon in weapons)
+        {
+            // ¬иконуЇмо пром≥нь ≥з перев≥ркою на перетин з об'Їктами
+            RaycastHit[] hits = Physics.RaycastAll(LineOfSight, weapon.Range);
+            Shoot(weapon);
+        }
+
+    }
+    public void Shoot(Weapon weapon)
+    {
+
+        ps.Play();
+        if(weapon.Accuracy > Random.Range(0f, 100.0f))
+        {
+            target.TakeDamage(1);
+            Debug.Log(this.name +" hitted "+ target.name);
+        }
 
     }
     IEnumerator DoCheck()
