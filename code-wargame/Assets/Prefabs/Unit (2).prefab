@@ -203,7 +203,6 @@ MonoBehaviour:
   recon: {fileID: 864213945584201197}
   movement: {fileID: 864213945584201196}
   player: {fileID: 0}
-  Team: 
   temp_CurrentHP: 0
   isVisible: 0
 --- !u!114 &864213945584201197
@@ -360,7 +359,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0

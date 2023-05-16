@@ -21,8 +21,14 @@ public class UnitMovementScript : MonoBehaviour
         if (moving)
         {
             Moving();
-            if (gameObject.transform.position.x - Destination.x <= 0.1 && gameObject.transform.position.x - Destination.x >= -0.1) moving = false;
+            if (isNear(Destination, 0.1f)) moving = false;
+            //if (gameObject.transform.position.x - Destination.x <= 0.1 && gameObject.transform.position.x - Destination.x >= -0.1) moving = false;
         }
+    }
+    bool isNear(Vector3 Target, float proximity)
+    {
+        if (Vector3.Distance(transform.position,Destination) < proximity) return true;
+        return false;
     }
     public void Moving()
     {
