@@ -6,7 +6,7 @@ using UnityEngine;
 public class Unit : MonoBehaviour
 {
     [SerializeField]
-    public Weapon weapon;
+    public WeaponSO weapon;
 
     [SerializeField]
     public UnitReconScript recon;

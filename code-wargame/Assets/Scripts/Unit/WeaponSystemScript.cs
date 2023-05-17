@@ -9,7 +9,7 @@ public class WeaponSystemScript : MonoBehaviour
     
     public ParticleSystem ps;
 
-    public List<Weapon> weapons;
+    public List<WeaponSO> weapons;
     public Unit target;
     public bool isTargeted;
 
@@ -60,7 +60,7 @@ public class WeaponSystemScript : MonoBehaviour
         // ¬изначаЇмо в≥дстань м≥ж точками
         float distance = direction.magnitude;
 
-        foreach (Weapon weapon in weapons)
+        foreach (WeaponSO weapon in weapons)
         {
             // ¬иконуЇмо пром≥нь ≥з перев≥ркою на перетин з об'Їктами
             RaycastHit[] hits = Physics.RaycastAll(LineOfSight, weapon.Range);
@@ -68,7 +68,7 @@ public class WeaponSystemScript : MonoBehaviour
         }
 
     }
-    public void Shoot(Weapon weapon)
+    public void Shoot(WeaponSO weapon)
     {
 
         ps.Play();
