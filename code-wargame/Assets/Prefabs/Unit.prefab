@@ -200,7 +200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df0b3b90335fa664eb9c8fe2e2ceb833, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 0}
+  unitStats: {fileID: 0}
   recon: {fileID: 864213945584201197}
   movement: {fileID: 864213945584201196}
   player: {fileID: 0}

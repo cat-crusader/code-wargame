@@ -2,11 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.AI;
 public class Unit : MonoBehaviour
 {
+    //[SerializeField]
+    //public WeaponSO weapon;
     [SerializeField]
-    public WeaponSO weapon;
+    public UnitSO unitStats;
 
     [SerializeField]
     public UnitReconScript recon;
@@ -17,6 +19,7 @@ public class Unit : MonoBehaviour
     [Header("Test")]
     public Player player;
 
+    private NavMeshAgent navMeshAgent;
 
     public int temp_CurrentHP;
 
@@ -37,8 +40,10 @@ public class Unit : MonoBehaviour
 
     public void Start()
     {
-       if(player.type == "enemy") SetInvisible();
-        temp_CurrentHP = 10;
+        if (GetComponent<NavMeshAgent>() != null) navMeshAgent = GetComponent<NavMeshAgent>();
+        if (player.type == "enemy") SetInvisible();
+        temp_CurrentHP = unitStats.hp;
+        navMeshAgent.speed = unitStats.speed / 10;
     }
     public void Destroy()
     {
