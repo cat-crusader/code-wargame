@@ -95,6 +95,24 @@ public class ClientPlayerControllerScript : MonoBehaviour
             // Do something with the object that was hit by the raycast.
         }
     }
+    public void OrderToFastMove()
+    {
+        if (selected == null) return;
+
+        RaycastHit hit;
+        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            foreach (Unit unit in selected)
+            {
+                unit.movement.MoveTo(hit.point);
+            }
+
+
+            // Do something with the object that was hit by the raycast.
+        }
+    }
 
     // Update is called once per frame
     void Update()

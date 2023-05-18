@@ -5,12 +5,15 @@ using UnityEngine.AI;
 
 public class UnitMovementScript : MonoBehaviour
 {
+    [SerializeField] Unit unit;
     private NavMeshAgent navMeshAgent;
     private string MovementType;
 
-    public float Speed = 2f;
-    public Vector3 MoveVector;
     public Vector3 Destination;
+    public Vector3 TempDestination;
+
+
+  
     public Vector3 pos;
     public bool moving;
     // Start is called before the first frame update
@@ -42,16 +45,35 @@ public class UnitMovementScript : MonoBehaviour
     }
     public void Moving()
     {
-        navMeshAgent.destination = Destination;
+        navMeshAgent.destination = TempDestination;
         //transform.Translate(MoveVector);
     }
     public void MoveTo(Vector3 toPos)
     {
         Destination = toPos;
-        pos = gameObject.transform.position;
-        MoveVector = Vector3.Normalize(toPos - pos);
-        MoveVector /= 10;
+        TempDestination = Destination;
+        //pos = gameObject.transform.position;
+        //MoveVector = Vector3.Normalize(toPos - pos);
+        //MoveVector /= 10;
         moving = true;
+    }
+    public void FastMoveTo(Vector3 toPos)
+    {
+        Destination = toPos;
+
+    }
+    public Curve GetNearestRoadSegment()// !!!not work
+    {
+        Curve nearestCurve=new Curve();
+        foreach(Curve curve in unit.roadSystem.curves)
+        {
+            if (nearestCurve == null)
+            {
+                //nearestCurve = curve;
+            }
+        }
+        //unit.roadSystem;
+        return new Curve();
     }
     private void OnDrawGizmos()
     {

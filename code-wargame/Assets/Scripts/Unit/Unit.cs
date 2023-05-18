@@ -5,8 +5,9 @@ using UnityEngine;
 using UnityEngine.AI;
 public class Unit : MonoBehaviour
 {
-    //[SerializeField]
-    //public WeaponSO weapon;
+
+    [SerializeField]
+    public RoadSystem roadSystem;
     [SerializeField]
     public UnitSO unitStats;
 

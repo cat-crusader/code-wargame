@@ -2,16 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeshCreator : MonoBehaviour
+public class RoadMeshCreator : MonoBehaviour
 {
+    [SerializeField] RoadSystem roadSystem;
     public int length = 100;
-    [SerializeField] Curve curve;
+    //[SerializeField] List<Curve> curves;
+    [SerializeField] GameObject MeshPrefab;
     // Start is called before the first frame update
     void Start()
     {
-        DrawRoad();
+        foreach (Curve curve in roadSystem.curves)
+        {
+            CreateRoadMesh(curve);
+        }
     }
-    public void DrawRoad()
+    public void CreateRoadMesh(Curve curve)
     {
         Mesh mesh = new Mesh();
 
@@ -24,8 +29,8 @@ public class MeshCreator : MonoBehaviour
             Vector3 curvePoint = curve.GetCurve(i / (float)length);
             Vector3 nextCurvePoint = curve.GetCurve((i+1) / (float)length);
 
-            Vector3 normal = GetNormal(i);
-            Vector3 nextNormal = GetNormal(i + 1);
+            Vector3 normal = GetNormal(i,curve);
+            Vector3 nextNormal = GetNormal(i + 1,curve);
 
             Vector3 clampedNormal = Vector3.ClampMagnitude(normal, 1f);
             Vector3 nextClampedNormal = Vector3.ClampMagnitude(nextNormal, 1f);
@@ -70,10 +75,10 @@ public class MeshCreator : MonoBehaviour
         mesh.uv = uv;
         mesh.triangles = trianges;
 
-
-        GetComponent<MeshFilter>().mesh = mesh;
+        GameObject roadMesh = Instantiate(MeshPrefab, transform);
+        roadMesh.GetComponent<MeshFilter>().mesh = mesh;
     }
-    public Vector3 GetNormal(int i)
+    public Vector3 GetNormal(int i, Curve curve)
     {
         float epsilon = 0.001f; // Adjust epsilon value as needed
         Vector3 positionPlusEpsilon = curve.GetCurve((i + epsilon) / (float)length);
@@ -84,18 +89,22 @@ public class MeshCreator : MonoBehaviour
     }
     private void OnDrawGizmos()
     {
+
         Gizmos.color = Color.red;
-        for (int i = 0; i < 100; i++)
+        foreach (Curve curve in roadSystem.curves)
         {
-            Vector3 curvePoint = curve.GetCurve(i / (float)length);
+            for (int i = 0; i < 100; i++)
+            {
+                Vector3 curvePoint = curve.GetCurve(i / (float)length);
 
-            float epsilon = 0.001f; // Adjust epsilon value as needed
-            Vector3 positionPlusEpsilon = curve.GetCurve((i + epsilon) / (float)length);
-            Vector3 positionMinusEpsilon = curve.GetCurve((i - epsilon) / (float)length);
-            Vector3 tangent = (positionPlusEpsilon - positionMinusEpsilon).normalized;
+                float epsilon = 0.001f; // Adjust epsilon value as needed
+                Vector3 positionPlusEpsilon = curve.GetCurve((i + epsilon) / (float)length);
+                Vector3 positionMinusEpsilon = curve.GetCurve((i - epsilon) / (float)length);
+                Vector3 tangent = (positionPlusEpsilon - positionMinusEpsilon).normalized;
 
-            Vector3 normal = Vector3.Cross(tangent , Vector3.up);
-            Gizmos.DrawLine(curvePoint, curvePoint+ Vector3.ClampMagnitude(normal, 1f));
+                Vector3 normal = Vector3.Cross(tangent, Vector3.up);
+                Gizmos.DrawLine(curvePoint, curvePoint + Vector3.ClampMagnitude(normal, 1f));
+            }
         }
     }
 
