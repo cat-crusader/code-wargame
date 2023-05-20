@@ -31,6 +31,12 @@ public class UnitMovementScript : MonoBehaviour
             Moving();
             if (isNear(Destination, 0.1f)) moving = false;
         }
+        //NavMeshHit navMeshHit;
+        //navMeshAgent.SamplePathPosition(NavMesh.AllAreas, 0f, out navMeshHit);
+        //if (navMeshHit.mask == "Forest")
+        //{
+
+        //}
         //if (moving)
         //{
         //    Moving();

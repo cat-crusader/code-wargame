@@ -9,14 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b72da5d9852c93745b891ab3a831dd69, type: 3}
-  m_Name: APC
+  m_Script: {fileID: 11500000, guid: 530a26b78b3cea643a2de509a47792da, type: 3}
+  m_Name: ATWeapon
   m_EditorClassIdentifier: 
-  name: APC
-  speed: 70
-  hp: 10
-  type: 1
-  frontalArmor: 1
-  rearArmor: 1
-  sideArmor: 1
-  topArmor: 1
+  Range: 4
+  Accuracy: 80
+  Damage: 3
+  damageType: 1
+  RoundsPerMinute: 10

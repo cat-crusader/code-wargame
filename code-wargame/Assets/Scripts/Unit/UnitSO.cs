@@ -9,4 +9,8 @@ public class UnitSO : ScriptableObject
     public int speed;
     public int hp;
     public UnitType type;
+    public int frontalArmor;
+    public int rearArmor;
+    public int sideArmor;
+    public int topArmor;
 }

@@ -26,7 +26,7 @@ public class UnitSymbolUIScript : MonoBehaviour
         if (UnitSymbol.transform.position != pos)
         {
             UnitSymbol.transform.position = pos;
-            Debug.Log(UnitSymbol.name + " updating position");
+            //Debug.Log(UnitSymbol.name + " updating position");
         }
     }
 }

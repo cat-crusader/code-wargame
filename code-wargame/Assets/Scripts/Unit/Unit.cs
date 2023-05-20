@@ -5,9 +5,15 @@ using UnityEngine;
 using UnityEngine.AI;
 public class Unit : MonoBehaviour
 {
+    [SerializeField]
+    public GameObject GameManager;
 
     [SerializeField]
     public RoadSystem roadSystem;
+
+    [SerializeField]
+    public FireController fireControl;
+
     [SerializeField]
     public UnitSO unitStats;
 
@@ -26,6 +32,7 @@ public class Unit : MonoBehaviour
 
     public bool isVisible;
 
+
     public void SetVisible()
     {
         isVisible = true;
@@ -41,6 +48,9 @@ public class Unit : MonoBehaviour
 
     public void Start()
     {
+        GameManager = GameObject.Find("GameManager");
+        fireControl = GameManager?.GetComponent<FireController>();
+
         if (GetComponent<NavMeshAgent>() != null) navMeshAgent = GetComponent<NavMeshAgent>();
         if (player.type == "enemy") SetInvisible();
         temp_CurrentHP = unitStats.hp;
@@ -52,9 +62,36 @@ public class Unit : MonoBehaviour
     }
     public void TakeDamage(int damage)
     {
+
+        //switch (unitStats.type)
+        //{
+        //    case UnitType.Infantry:
+        //        CalculateInfantryDamage(damage, type);
+        //        break;
+        //    case UnitType.Vehicle:
+        //        CalculateVehicleDamage(damage, type);
+        //        break;
+        //}
         temp_CurrentHP -= damage;
         if (temp_CurrentHP <= 0) Destroy();
     }
+    public void CalculateInfantryDamage(int damage, DamageType type)
+    {
+        
+        // infantry dont get penetration damage
+    }
+    public void CalculateVehicleDamage(int damage, DamageType type)
+    {
+        if (type == DamageType.Explosive)
+        {
+
+        }
+        else if (type == DamageType.Penetration)
+        {
+
+        }
+    }
+
     IEnumerator DoCheck()
     {
 

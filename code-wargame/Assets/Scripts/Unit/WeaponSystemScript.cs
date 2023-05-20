@@ -10,6 +10,9 @@ public class WeaponSystemScript : MonoBehaviour
     public ParticleSystem ps;
 
     public List<WeaponSO> weapons;
+    public List<float> weaponsCooldown;//in sec
+    public List<bool> weaponsReadyToShoot;
+
     public Unit target;
     public bool isTargeted;
 
@@ -20,13 +23,41 @@ public class WeaponSystemScript : MonoBehaviour
     {
         target = null;
         isTargeted = false;
-        //ps.Play();
+
+        weaponsCooldown = new List<float>();//coldown initiating
+        for(int i = 0;i<weapons.Count;i++)
+        {
+            weaponsCooldown.Add(0f);
+        }
+
+        weaponsReadyToShoot = new List<bool>();//ready to shoot initiating
+        for (int i = 0; i < weapons.Count; i++)
+        {
+            weaponsReadyToShoot.Add(true);
+        }
+        
         StartCoroutine(DoCheck());
     }
-
+    private void FixedUpdate()
+    {
+        for (int i = 0; i < weapons.Count; i++)
+        {
+            if (weaponsReadyToShoot[i]) continue;
+            if (!isNear(0,weaponsCooldown[i],0.1f)) 
+            { weaponsCooldown[i] -= Time.deltaTime; }
+            if (isNear(0, weaponsCooldown[i], 0.1f))
+            { weaponsReadyToShoot[i] = true; }
+        }
+    }
+    public bool isNear(float num,float numToCompare, float eps)
+    {
+        //Debug.Log("is near");
+        if (num-eps<numToCompare && numToCompare<num + eps) return true;
+        return false;
+    }
     public void AutoTargeting()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(unit.gameObject.transform.position, 3);//change targeting to smaller
+        Collider[] hitColliders = Physics.OverlapSphere(unit.gameObject.transform.position, 3);
         isTargeted = false;
         
 
@@ -45,7 +76,7 @@ public class WeaponSystemScript : MonoBehaviour
         if (isTargeted == false)
         {
             target = null;
-            ps.Stop();
+            //ps.Stop();
         }
     }
     public void EngageTarget()
@@ -59,28 +90,34 @@ public class WeaponSystemScript : MonoBehaviour
 
         // ¬изначаЇмо в≥дстань м≥ж точками
         float distance = direction.magnitude;
-
-        foreach (WeaponSO weapon in weapons)
+        for(int i = 0; i < weapons.Count; i++)
         {
-            // ¬иконуЇмо пром≥нь ≥з перев≥ркою на перетин з об'Їктами
-            RaycastHit[] hits = Physics.RaycastAll(LineOfSight, weapon.Range);
-            Shoot(weapon);
+            if (weaponsReadyToShoot[i] == true)
+            {
+                RaycastHit[] hits = Physics.RaycastAll(LineOfSight, weapons[i].Range);
+                Shoot(weapons[i]);
+                WeaponCooldown(weapons[i],i);
+            }
         }
+        //foreach (WeaponSO weapon in weapons)
+        //{
+        //    // ¬иконуЇмо пром≥нь ≥з перев≥ркою на перетин з об'Їктами
+        //    RaycastHit[] hits = Physics.RaycastAll(LineOfSight, weapon.Range);
+        //    Shoot(weapon);
+        //}
 
     }
     public void Shoot(WeaponSO weapon)
     {
 
         ps.Play();
-
+        unit.fireControl.FireShot(unit, target, weapon);
         
-        
-        if(weapon.Accuracy > Random.Range(0f, 100.0f))
-        {
-            target.TakeDamage(1);
-            Debug.Log(this.name +" hitted "+ target.name);
-        }
-
+    }
+    public void WeaponCooldown(WeaponSO weapon,int i) 
+    {
+        weaponsCooldown[i] = 60f/ (float)weapon.RoundsPerMinute;
+        weaponsReadyToShoot[i] = false;
     }
     IEnumerator DoCheck()
     {

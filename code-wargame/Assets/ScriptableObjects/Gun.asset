@@ -14,3 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Range: 3
   Accuracy: 70
+  Damage: 1
+  damageType: 1
+  RoundsPerMinute: 60

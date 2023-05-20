@@ -48,6 +48,8 @@ MonoBehaviour:
   ps: {fileID: 7104007111195189535}
   weapons:
   - {fileID: 11400000, guid: c966b425d1d66c841902d1fcd7524628, type: 2}
+  weaponsCooldown: []
+  weaponsReadyToShoot: 
   target: {fileID: 0}
   isTargeted: 0
   direction: {x: 0, y: 0, z: 0}
@@ -200,6 +202,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df0b3b90335fa664eb9c8fe2e2ceb833, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GameManager: {fileID: 0}
+  roadSystem: {fileID: 0}
+  fireControl: {fileID: 0}
   unitStats: {fileID: 0}
   recon: {fileID: 864213945584201197}
   movement: {fileID: 864213945584201196}
@@ -232,9 +237,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9722ea70525ac844592afc767ca36297, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 1
-  MoveVector: {x: 0, y: 0, z: 0}
+  unit: {fileID: 0}
   Destination: {x: 0, y: 0, z: 0}
+  TempDestination: {x: 0, y: 0, z: 0}
   pos: {x: 0, y: 0, z: 0}
   moving: 0
 --- !u!114 &864213945584201198
@@ -274,7 +279,7 @@ NavMeshAgent:
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: 0.5
-  m_WalkableMask: 7
+  m_WalkableMask: 23
   m_ObstacleAvoidanceType: 4
 --- !u!1 &7104007111195189529
 GameObject:
@@ -561,7 +566,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.3
+      scalar: 0.1
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -4203,12 +4208,12 @@ ParticleSystem:
         m_RotationOrder: 4
     maxLights: 20
   TrailModule:
-    enabled: 0
+    enabled: 1
     mode: 0
     ratio: 1
     lifetime:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 1
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -4217,21 +4222,21 @@ ParticleSystem:
         - serializedVersion: 3
           time: 0
           value: 1
-          inSlope: 0
-          outSlope: 0
+          inSlope: -2
+          outSlope: -2
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
+          inWeight: 0
+          outWeight: 0
         - serializedVersion: 3
           time: 1
-          value: 1
+          value: 0
           inSlope: 0
           outSlope: 0
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
+          inWeight: 0
+          outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
@@ -4336,8 +4341,8 @@ ParticleSystem:
         m_NumAlphaKeys: 2
     widthOverTrail:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 1
+      minMaxState: 1
+      scalar: 0.4
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -4345,21 +4350,21 @@ ParticleSystem:
         - serializedVersion: 3
           time: 0
           value: 1
-          inSlope: 0
-          outSlope: 0
+          inSlope: -2
+          outSlope: -2
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
+          inWeight: 0
+          outWeight: 0
         - serializedVersion: 3
           time: 1
-          value: 1
+          value: 0
           inSlope: 0
           outSlope: 0
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
+          inWeight: 0
+          outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
@@ -5037,7 +5042,8 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10308, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 917e43ad8d8528840a4bfbfd3c237e31, type: 2}
+  - {fileID: 2100000, guid: 917e43ad8d8528840a4bfbfd3c237e31, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5058,7 +5064,7 @@ ParticleSystemRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_RenderMode: 0
+  m_RenderMode: 4
   m_MeshDistribution: 0
   m_SortMode: 0
   m_MinParticleSize: 0
@@ -5079,7 +5085,7 @@ ParticleSystemRenderer:
   m_FreeformStretching: 0
   m_RotateWithStretchDirection: 1
   m_VertexStreams: 00010304
-  m_Mesh: {fileID: 0}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
