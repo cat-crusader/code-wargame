@@ -1689,6 +1689,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4661632072834378843, guid: 3830c1ba7c3ee604a9067c08ba45ca83, type: 3}
+      propertyPath: ShellTemporary
+      value: 
+      objectReference: {fileID: 8893215129470897604, guid: a1ae5193bdb4a8349b1ea01f66a14903, type: 3}
     - target: {fileID: 6641920717523947513, guid: 3830c1ba7c3ee604a9067c08ba45ca83, type: 3}
       propertyPath: explosionPS
       value: 

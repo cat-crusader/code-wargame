@@ -13,7 +13,7 @@ public class UnitReconScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        VisionRange = (int)unit.unitStats.optics/2;
     }
 
     public List<Unit> Recon()

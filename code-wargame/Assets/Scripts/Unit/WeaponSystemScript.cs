@@ -96,6 +96,7 @@ public class WeaponSystemScript : MonoBehaviour
             {
                 RaycastHit[] hits = Physics.RaycastAll(LineOfSight, weapons[i].Range);
                 Shoot(weapons[i]);
+                //if(weapons[i].Damage>=2)Instantiate()
                 WeaponCooldown(weapons[i],i);
             }
         }
