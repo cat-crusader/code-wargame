@@ -6,6 +6,10 @@ using UnityEngine.AI;
 public class UnitMovementScript : MonoBehaviour
 {
     [SerializeField] Unit unit;
+
+    [SerializeField]
+    public RoadSystem roadSystem;
+
     private NavMeshAgent navMeshAgent;
     private string MovementType;
 
@@ -65,21 +69,80 @@ public class UnitMovementScript : MonoBehaviour
     }
     public void FastMoveTo(Vector3 toPos)
     {
+        if (unit.unitStats.type == UnitType.Infantry)
+        {
+            MoveTo(toPos);
+            return;
+        }
         Destination = toPos;
 
+        float timeToTravel = CalculateTimeToTravel(toPos, unit.unitStats.speed);
+        Debug.Log(timeToTravel + " time to travel");
+        Curve nearestRoadToUnit = GetNearestRoadSegment(unit.gameObject.transform.position);
+        Curve nearestRoadToTarget = GetNearestRoadSegment(toPos);
+        TempDestination = GetNearestRoadPosition(unit.gameObject.transform.position, nearestRoadToUnit, 10);
+
+        moving = true;
     }
-    public Curve GetNearestRoadSegment()// !!!not work
+    public float CalculateTimeToTravel(Vector3 toPos, float speed)
     {
-        Curve nearestCurve=new Curve();
-        foreach(Curve curve in unit.roadSystem.curves)
+        float Distance = Vector3.Distance(unit.gameObject.transform.position, toPos);
+        return Distance / speed *10;
+    }
+    public Vector3 GetNearestRoadPosition(Vector3 from, Curve curve, float accuracy)
+    {
+        float distance = Mathf.Infinity;
+        float minDistance = Mathf.Infinity;
+        Vector3 nearestPoint = Vector3.zero;
+        for (int i = 0; i < accuracy; i++)
         {
-            if (nearestCurve == null)
+            distance = Vector3.Distance(from, curve.GetCurve(i / accuracy));
+            if (distance < minDistance)
             {
-                //nearestCurve = curve;
+                minDistance = distance;
+                nearestPoint = curve.GetCurve(i / accuracy);
+            }
+        }
+        return nearestPoint;
+    }
+    public Curve GetNearestRoadSegment(Vector3 from)// !!!not work
+    {
+        Curve nearestCurve=null;
+        float distance = Mathf.Infinity;
+        float minDistance = Mathf.Infinity;
+        foreach (Curve curve in roadSystem.curves)
+        {
+            distance = CalculateAverageDistanceToCurve(from, curve);
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                nearestCurve = curve;
             }
         }
         //unit.roadSystem;
-        return new Curve();
+        return nearestCurve;
+    }
+    public float CalculateAverageDistanceToCurve(Vector3 pos, Curve curve)
+    {
+        List<Vector3> points = new List<Vector3>();
+        points.Add(curve.start.position);
+        points.Add(curve.end.position);
+        for (int i = 0; i < curve.points.Count; i++)
+            points.Add(curve.points[i].position);
+
+        Vector3 average = GetAverageVector(points);
+
+        Debug.Log(average);
+        return Vector3.Distance(pos,average);
+    }
+    public Vector3 GetAverageVector(List<Vector3> list)
+    {
+        Vector3 average = Vector3.zero;
+        for (int i = 0; i < list.Count; i++)
+        {
+            average += list[i];
+        }
+        return average /= list.Count;
     }
     private void OnDrawGizmos()
     {

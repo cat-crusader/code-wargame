@@ -8,8 +8,7 @@ public class Unit : MonoBehaviour
     [SerializeField]
     public GameObject GameManager;
 
-    [SerializeField]
-    public RoadSystem roadSystem;
+
 
     [SerializeField]
     public FireController fireControl;

@@ -413,6 +413,7 @@ MonoBehaviour:
   SelectBoxEndPos: {x: 0, y: 0, z: 0}
   SelectBoxCenter: {x: 0, y: 0, z: 0}
   SelectBoxSize: {x: 0, y: 0, z: 0}
+  isFastMove: 0
   selected: []
 --- !u!114 &158737047
 MonoBehaviour:
@@ -1527,6 +1528,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Unit (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 864213945584201196, guid: bc2b34cf13096b044b4e15ec99e78174, type: 3}
+      propertyPath: roadSystem
+      value: 
+      objectReference: {fileID: 917945737}
     - target: {fileID: 864213945584201198, guid: bc2b34cf13096b044b4e15ec99e78174, type: 3}
       propertyPath: cam
       value: 
@@ -1558,7 +1563,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7973690417717625409, guid: 766e62c4395e350409031f4fd19b8caa, type: 3}
       propertyPath: weapons.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7973690417717625409, guid: 766e62c4395e350409031f4fd19b8caa, type: 3}
       propertyPath: weapons.Array.data[1]
@@ -1581,6 +1586,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: ea7759cd1b068d7419786ae4b12c6653, type: 2}
     - target: {fileID: 7973690418623689749, guid: 766e62c4395e350409031f4fd19b8caa, type: 3}
+      propertyPath: roadSystem
+      value: 
+      objectReference: {fileID: 917945737}
+    - target: {fileID: 7973690418623689750, guid: 766e62c4395e350409031f4fd19b8caa, type: 3}
       propertyPath: roadSystem
       value: 
       objectReference: {fileID: 917945737}
@@ -1773,7 +1782,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7133044952282512755, guid: 5e0d76facbc6a5940a5c625bb23a05e1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.09
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 7133044952282512755, guid: 5e0d76facbc6a5940a5c625bb23a05e1, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1781,7 +1790,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7133044952282512755, guid: 5e0d76facbc6a5940a5c625bb23a05e1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.31
+      value: -7.68
       objectReference: {fileID: 0}
     - target: {fileID: 7133044952282512755, guid: 5e0d76facbc6a5940a5c625bb23a05e1, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1827,6 +1836,10 @@ PrefabInstance:
       propertyPath: UnitSymbolsCanvas
       value: 
       objectReference: {fileID: 1782068316}
+    - target: {fileID: 7133044952282512767, guid: 5e0d76facbc6a5940a5c625bb23a05e1, type: 3}
+      propertyPath: roadSystem
+      value: 
+      objectReference: {fileID: 917945737}
     - target: {fileID: 7133044952311815242, guid: 5e0d76facbc6a5940a5c625bb23a05e1, type: 3}
       propertyPath: m_IsActive
       value: 1

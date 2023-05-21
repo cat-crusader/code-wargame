@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 530a26b78b3cea643a2de509a47792da, type: 3}
   m_Name: ATWeapon
   m_EditorClassIdentifier: 
-  Range: 4
+  Range: 7
   Accuracy: 80
   Damage: 3
   damageType: 1

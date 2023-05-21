@@ -17,12 +17,14 @@ public class ClientPlayerControllerScript : MonoBehaviour
     public Vector3 SelectBoxCenter;
     public Vector3 SelectBoxSize;
 
+    public bool isFastMove;
+
 
     public List<Unit> selected;
     // Start is called before the first frame update
     void Start()
     {
-
+        isFastMove = false;
     }
     public void SelectUnit()
     {
@@ -79,6 +81,7 @@ public class ClientPlayerControllerScript : MonoBehaviour
 
     public void OrderToMove()
     {
+        
         if (selected == null) return;
 
         RaycastHit hit;
@@ -88,31 +91,19 @@ public class ClientPlayerControllerScript : MonoBehaviour
         {
             foreach (Unit unit in selected)
             {
-                unit.movement.MoveTo(hit.point);
+                //Debug.Log(unit.movement);
+                if (isFastMove) unit.movement.FastMoveTo(hit.point);
+                else unit.movement.MoveTo(hit.point);
+                //else unit.movement.MoveTo(hit.point);
+
             }
 
 
             // Do something with the object that was hit by the raycast.
         }
+        if (isFastMove) isFastMove = false;
     }
-    public void OrderToFastMove()
-    {
-        if (selected == null) return;
 
-        RaycastHit hit;
-        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-
-        if (Physics.Raycast(ray, out hit))
-        {
-            foreach (Unit unit in selected)
-            {
-                unit.movement.MoveTo(hit.point);
-            }
-
-
-            // Do something with the object that was hit by the raycast.
-        }
-    }
 
     // Update is called once per frame
     void Update()
@@ -135,7 +126,13 @@ public class ClientPlayerControllerScript : MonoBehaviour
 
         if (Input.GetMouseButtonDown(1))
         {
-            OrderToMove();
+
+           OrderToMove();
+            
+        }
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            isFastMove = true;
         }
 
 

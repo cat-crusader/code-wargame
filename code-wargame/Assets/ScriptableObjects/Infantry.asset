@@ -14,5 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Infantry
   speed: 20
+  roadSpeed: 20
   hp: 10
   type: 0
+  optics: 20
+  frontalArmor: 0
+  rearArmor: 0
+  sideArmor: 0
+  topArmor: 0

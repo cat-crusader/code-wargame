@@ -7,6 +7,7 @@ public class UnitSO : ScriptableObject
 {
     public new string name;
     public int speed;
+    public int roadSpeed;
     public int hp;
     public UnitType type;
     public ReconnaissanceType optics;

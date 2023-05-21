@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: APC
   m_EditorClassIdentifier: 
   name: APC
-  speed: 70
+  speed: 40
+  roadSpeed: 70
   hp: 10
   type: 1
+  optics: 10
   frontalArmor: 1
   rearArmor: 1
   sideArmor: 1

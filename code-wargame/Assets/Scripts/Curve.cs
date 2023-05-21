@@ -4,29 +4,22 @@ using UnityEngine;
 
 public class Curve : MonoBehaviour
 {
-    [SerializeField] private Transform start;
-    [SerializeField] private Transform end;
+    [SerializeField] public Transform start;
+    [SerializeField] public Transform end;
 
     [SerializeField] private GameObject pointPrefab;
     public Transform result;
     private float interpolateAmount;
 
 
-    [SerializeField] private List<Transform> points;
+    [SerializeField] public List<Transform> points;
 
 
 
     // Update is called once per frame
     void Update()
     {
-        //interpolateAmount = (interpolateAmount + Time.deltaTime) % 1;
 
-        //if(points.Count == 0)
-        //    result.position = Vector3.Lerp(start.position, end.position, interpolateAmount);
-        //if (points.Count == 1)
-        //    result.position = QuadraticLerp(start.position, points[0].position, end.position, interpolateAmount);
-        //if (points.Count == 2)
-        //    result.position = CubicLerp(start.position,points[0].position,points[1].position,end.position,interpolateAmount);
 
     }
     public Vector3 GetCurve(float interpolate)

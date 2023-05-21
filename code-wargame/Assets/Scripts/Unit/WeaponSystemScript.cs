@@ -57,7 +57,10 @@ public class WeaponSystemScript : MonoBehaviour
     }
     public void AutoTargeting()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(unit.gameObject.transform.position, 3);
+        Collider[] hitColliders = Physics.OverlapSphere(unit.gameObject.transform.position, weapons[0].Range);
+
+        // CURRENTLY WEAPON SYSTEM SHOULD HAVE WEAPONS WITH SAME RANGE
+
         isTargeted = false;
         
 
@@ -110,9 +113,14 @@ public class WeaponSystemScript : MonoBehaviour
     }
     public void Shoot(WeaponSO weapon)
     {
+        Debug.Log(weapon.name);
+        Debug.Log(unit.unitStats.name);
+        Debug.Log(ps.name);
 
-        ps.Play();
-        unit.fireControl.FireShot(unit, target, weapon);
+        // TEMPORARY CHANGE IT LATER 
+        if(weapon.Damage<2) ps.Play();
+
+        unit.fireControl?.FireShot(unit, target, weapon);
         
     }
     public void WeaponCooldown(WeaponSO weapon,int i) 
