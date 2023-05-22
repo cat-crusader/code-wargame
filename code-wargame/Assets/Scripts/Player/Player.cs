@@ -8,6 +8,9 @@ public class Player : MonoBehaviour
     PlayerVisionScript vision;
 
     [SerializeField]
+    public ClientPlayerControllerScript controllerScript;
+
+    [SerializeField]
     ClientPlayerCameraScript cameraScript;
 
     public List<Unit> units;

@@ -203,7 +203,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameManager: {fileID: 0}
-  roadSystem: {fileID: 0}
   fireControl: {fileID: 0}
   unitStats: {fileID: 0}
   recon: {fileID: 864213945584201197}
@@ -238,6 +237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unit: {fileID: 864213945584201199}
+  roadSystem: {fileID: 0}
   Destination: {x: 0, y: 0, z: 0}
   TempDestination: {x: 0, y: 0, z: 0}
   pos: {x: 0, y: 0, z: 0}
@@ -254,6 +254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e331f43a2cb329044a26878f2c4f7091, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unit: {fileID: 864213945584201199}
   UnitSymbolsCanvas: {fileID: 0}
   UnitSybmolPrefab: {fileID: 7853286007804466157, guid: 45152e82163ed184d8014dfb7d427aee, type: 3}
   UnitSymbol: {fileID: 0}

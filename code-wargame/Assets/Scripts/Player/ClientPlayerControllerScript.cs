@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,6 +22,13 @@ public class ClientPlayerControllerScript : MonoBehaviour
 
 
     public List<Unit> selected;
+
+    public event EventHandler<OnSelectedArgs> OnSelected;
+    public class OnSelectedArgs : EventArgs
+    {
+       public List<Unit> selected;
+
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -45,6 +53,7 @@ public class ClientPlayerControllerScript : MonoBehaviour
                 selected = null;
             }
         }
+        OnSelected?.Invoke(this, new OnSelectedArgs { selected = selected });
     }
     public void SelectBoxStart()
     {
@@ -77,6 +86,7 @@ public class ClientPlayerControllerScript : MonoBehaviour
                 selected.Add(col.gameObject.GetComponentInParent<Unit>());
             }
         }
+        OnSelected?.Invoke(this, new OnSelectedArgs { selected = selected});
     }
 
     public void OrderToMove()

@@ -32,6 +32,18 @@ public class Unit : MonoBehaviour
     public bool isVisible;
 
 
+    public event EventHandler<OnHPChangeArgs> OnHPChange;
+    public class OnHPChangeArgs : EventArgs
+    {
+        public int HP;  
+    }
+
+    public event EventHandler<OnUnitSpawnArgs> OnUnitSpawn;
+    public class OnUnitSpawnArgs : EventArgs
+    {
+        public Unit unit;
+    }
+
     public void SetVisible()
     {
         isVisible = true;
@@ -54,6 +66,9 @@ public class Unit : MonoBehaviour
         if (player.type == "enemy") SetInvisible();
         temp_CurrentHP = unitStats.hp;
         navMeshAgent.speed = unitStats.speed / 10;
+
+        OnUnitSpawn?.Invoke(this, new OnUnitSpawnArgs { unit = this });
+
     }
     public void Destroy()
     {
@@ -62,34 +77,12 @@ public class Unit : MonoBehaviour
     public void TakeDamage(int damage)
     {
 
-        //switch (unitStats.type)
-        //{
-        //    case UnitType.Infantry:
-        //        CalculateInfantryDamage(damage, type);
-        //        break;
-        //    case UnitType.Vehicle:
-        //        CalculateVehicleDamage(damage, type);
-        //        break;
-        //}
         temp_CurrentHP -= damage;
+        OnHPChange?.Invoke(this, new OnHPChangeArgs { HP = temp_CurrentHP});
+
         if (temp_CurrentHP <= 0) Destroy();
     }
-    public void CalculateInfantryDamage(int damage, DamageType type)
-    {
-        
-        // infantry dont get penetration damage
-    }
-    public void CalculateVehicleDamage(int damage, DamageType type)
-    {
-        if (type == DamageType.Explosive)
-        {
 
-        }
-        else if (type == DamageType.Penetration)
-        {
-
-        }
-    }
 
     IEnumerator DoCheck()
     {
