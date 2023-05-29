@@ -59,16 +59,20 @@ public class Unit : MonoBehaviour
 
     public void Start()
     {
+
+        OnSpawn();
+    }
+    public void OnSpawn()
+    {
         GameManager = GameObject.Find("GameManager");
         fireControl = GameManager?.GetComponent<FireController>();
 
         if (GetComponent<NavMeshAgent>() != null) navMeshAgent = GetComponent<NavMeshAgent>();
-        if (player.type == "enemy") SetInvisible();
+        if (player?.type == "enemy") SetInvisible();
         temp_CurrentHP = unitStats.hp;
         navMeshAgent.speed = unitStats.speed / 10;
 
         OnUnitSpawn?.Invoke(this, new OnUnitSpawnArgs { unit = this });
-
     }
     public void Destroy()
     {

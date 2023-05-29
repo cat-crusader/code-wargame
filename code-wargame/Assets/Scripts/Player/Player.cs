@@ -21,6 +21,12 @@ public class Player : MonoBehaviour
     {
 
     }
-
+    public void SpawnUnit(GameObject unit, Transform spawnPosition)
+    {
+        GameObject newUnit = Instantiate(unit, spawnPosition.position, Quaternion.identity);
+        Unit newUnitScript = newUnit.GetComponent<Unit>();
+        newUnitScript.player = this;
+        units.Add(newUnitScript);
+    }
 
 }

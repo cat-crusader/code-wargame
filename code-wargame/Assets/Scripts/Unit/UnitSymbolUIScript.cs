@@ -26,17 +26,19 @@ public class UnitSymbolUIScript : MonoBehaviour
     public Vector3 offset;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        UnitSymbolsCanvas = GameObject.Find("Unit Labels Canvas");
+        cam = GameObject.Find("Main Camera").GetComponent<Camera>();
         UnitSymbol = Instantiate(UnitSybmolPrefab, UnitSymbolsCanvas.transform);
         textChild = UnitSymbol.transform.GetChild(2);
-        text = textChild?.GetComponent<TMP_Text>();
+        text = textChild.GetComponent<TMP_Text>();
         labelImage = UnitSymbol.transform.GetChild(1).GetComponent<Image>();
         outline = UnitSymbol.transform.GetChild(0);
 
         unit.OnHPChange += Unit_OnHPChange;
         unit.OnUnitSpawn += Unit_OnUnitSpawn;
-        if(unit.player.controllerScript!=null) unit.player.controllerScript.OnSelected += ControllerScript_OnSelected;
+        if(unit.player?.controllerScript!=null) unit.player.controllerScript.OnSelected += ControllerScript_OnSelected;
     }
 
     private void ControllerScript_OnSelected(object sender, ClientPlayerControllerScript.OnSelectedArgs e)// THERE MAYBE SOME BUG WITH OUTLINE, ENEMY DONT OUTLINE FOR SOME REASON (CAUSE NOW ENEMY HAS NO PLAYER CONTROLLER SCRIPT)
@@ -63,6 +65,7 @@ public class UnitSymbolUIScript : MonoBehaviour
 
     private void Unit_OnUnitSpawn(object sender, Unit.OnUnitSpawnArgs e)
     {
+        Debug.Log("Unit spawned");
         if (unit.unitStats.type == UnitType.Infantry)
         {
             text.text = e.unit.unitStats.name + " " + e.unit.unitStats.hp;
@@ -76,7 +79,7 @@ public class UnitSymbolUIScript : MonoBehaviour
         if (e.unit.player.type == "enemy")//TEMPORARY ENEMY UNIT COLORING
         {
             Color redcolor;
-            if (ColorUtility.TryParseHtmlString("#F84C33C8", out redcolor))
+            if (ColorUtility.TryParseHtmlString("#F84C333F", out redcolor))
             {//09FF0064
                 labelImage.color = redcolor;
             }
@@ -85,7 +88,7 @@ public class UnitSymbolUIScript : MonoBehaviour
         else
         {//
             Color bluecolor;
-            if (ColorUtility.TryParseHtmlString("#4A3EFFC8", out bluecolor))
+            if (ColorUtility.TryParseHtmlString("#4A3EFF3F", out bluecolor))
             {
                 labelImage.color = bluecolor;
             }
