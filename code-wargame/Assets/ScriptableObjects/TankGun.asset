@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 530a26b78b3cea643a2de509a47792da, type: 3}
-  m_Name: ATWeapon
+  m_Name: TankGun
   m_EditorClassIdentifier: 
-  Range: 13
-  Accuracy: 80
-  Damage: 3
+  Range: 20
+  Accuracy: 50
+  Damage: 5
   damageType: 1
-  RoundsPerMinute: 10
+  RoundsPerMinute: 6

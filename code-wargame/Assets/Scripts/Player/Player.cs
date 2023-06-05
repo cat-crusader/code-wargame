@@ -27,6 +27,17 @@ public class Player : MonoBehaviour
         Unit newUnitScript = newUnit.GetComponent<Unit>();
         newUnitScript.player = this;
         units.Add(newUnitScript);
+        newUnitScript.OnUnitSpawn += NewUnitScript_OnUnitSpawn; 
     }
-
+    public void RemoveFromUnits(Unit unit)
+    {
+        units.Remove(unit);
+    }
+    private void NewUnitScript_OnUnitSpawn(object sender, Unit.OnUnitSpawnArgs e)
+    {
+        if (e.spawn == false)
+        {
+            RemoveFromUnits(e.unit);
+        }
+    }
 }

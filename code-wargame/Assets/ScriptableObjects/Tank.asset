@@ -9,11 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 530a26b78b3cea643a2de509a47792da, type: 3}
-  m_Name: ATWeapon
+  m_Script: {fileID: 11500000, guid: b72da5d9852c93745b891ab3a831dd69, type: 3}
+  m_Name: Tank
   m_EditorClassIdentifier: 
-  Range: 13
-  Accuracy: 80
-  Damage: 3
-  damageType: 1
-  RoundsPerMinute: 10
+  name: Tank
+  speed: 25
+  roadSpeed: 25
+  hp: 20
+  type: 1
+  optics: 10
+  frontalArmor: 2
+  rearArmor: 2
+  sideArmor: 2
+  topArmor: 2

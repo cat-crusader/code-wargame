@@ -35,33 +35,16 @@ public class RoadMeshCreator : MonoBehaviour
             Vector3 clampedNormal = Vector3.ClampMagnitude(normal, 1f);
             Vector3 nextClampedNormal = Vector3.ClampMagnitude(nextNormal, 1f);
 
-            //Debug.Log(i / (float)length);
             verticies[0 + i*4] = new Vector3(curvePoint.x, curvePoint.y, curvePoint.z);
             verticies[1 + i*4] = new Vector3(nextCurvePoint.x, nextCurvePoint.y, nextCurvePoint.z);
             verticies[2 + i*4] = new Vector3(nextCurvePoint.x+nextClampedNormal.x, nextCurvePoint.y+nextClampedNormal.y,nextCurvePoint.z+nextClampedNormal.z);
             verticies[3 + i*4] = new Vector3(curvePoint.x+clampedNormal.x, curvePoint.y + clampedNormal.y, curvePoint.z + clampedNormal.z);
-            //Debug.Log(verticies[0 + i * 4] +":" +verticies[1 + i * 4] + ":" + verticies[2 + i * 4] + ":" + verticies[3 + i * 4]);
-            //verticies[0+i] = new Vector3(0, 0, 0);
-            //verticies[1+i] = new Vector3(0, 0, 1);
-            //verticies[2+i] = new Vector3(1, 0, 1);
-            //verticies[3+i] = new Vector3(1, 0, 0);
-
 
             uv[0+i*4] = new Vector2(0, 0);
             uv[1+i*4] = new Vector2(0, 1);
             uv[2+i*4] = new Vector2(1, 1);
             uv[3+i*4] = new Vector2(1, 0);
 
-            //front
-            //trianges[0 + i * 6] = 0 + i * 4;
-            //trianges[1 + i * 6] = 1 + i * 4;
-            //trianges[2 + i * 6] = 2 + i * 4;
-
-            //trianges[3 + i * 6] = 0 + i * 4;
-            //trianges[4 + i * 6] = 2 + i * 4;
-            //trianges[5 + i * 6] = 3 + i * 4;
-
-            //back
             trianges[0 + i * 6] = 0 + i * 4;
             trianges[1 + i * 6] = 2 + i * 4;
             trianges[2 + i * 6] = 1 + i * 4;

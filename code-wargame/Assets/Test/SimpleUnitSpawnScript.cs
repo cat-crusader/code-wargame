@@ -21,7 +21,8 @@ public class SimpleUnitSpawnScript : MonoBehaviour
     {
         int cost = 0;
         if (unit.GetComponent<Unit>()?.unitStats.type == UnitType.Infantry) cost = 20;
-        if (unit.GetComponent<Unit>()?.unitStats.type == UnitType.Vehicle) cost = 30;
+        if (unit.GetComponent<Unit>()?.unitStats.name == "APC") cost = 30;
+        if (unit.GetComponent<Unit>()?.unitStats.name == "Tank") cost = 50;
         if (Points - cost >= 0)
         {
             player1.SpawnUnit(unit, spawnPosition);
