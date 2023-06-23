@@ -13,7 +13,8 @@ public class UnitReconScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        VisionRange = (int)unit.unitStats.optics/2;
+        VisionRange = (int)unit.unitStats.optics;
+        if (unit.player.type == "enemy") unit.SetInvisible();
     }
 
     public List<Unit> Recon()
@@ -27,7 +28,7 @@ public class UnitReconScript : MonoBehaviour
             if (hitCollider.gameObject.GetComponentInParent<Unit>() == null) continue;
             var recUnit = hitCollider.gameObject.GetComponentInParent<Unit>();
 
-            if (recUnit.player.type == "enemy" && recUnit.isVisible == false && unit.player.type!="enemy")
+            if (recUnit.player.type == "enemy" && unit.player.type !="enemy" && recUnit.isVisible == false)
             {
                  visible.Add(hitCollider.gameObject.GetComponentInParent<Unit>());
                  recUnit.SetVisible();

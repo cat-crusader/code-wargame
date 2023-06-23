@@ -69,7 +69,7 @@ public class WeaponSystemScript : MonoBehaviour
             if (hitCollider.gameObject.GetComponentInParent<Unit>() == null) continue;
 
             
-            if (target == null && hitCollider.gameObject.GetComponentInParent<Unit>().player.type == "enemy" && unit.player.type!="enemy")
+            if (target == null && hitCollider.gameObject.GetComponentInParent<Unit>().player.type != unit.player.type && hitCollider.gameObject.GetComponentInParent<Unit>().isVisible)
             {
                 target = hitCollider.gameObject.GetComponentInParent<Unit>();
                 
