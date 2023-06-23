@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TankGun
   m_EditorClassIdentifier: 
   Range: 20
-  Accuracy: 50
-  Damage: 5
+  Accuracy: 60
+  Damage: 8
   damageType: 1
-  RoundsPerMinute: 6
+  RoundsPerMinute: 8
